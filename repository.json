@@ -1,12 +1,12 @@
 {
-  "author": "Thomas Howard",
-  "gitHubUrl": "https://github.com/tchoward",
+  "author": "wizkidorg",
+  "gitHubUrl": "https://github.com/wizkidorg",
   "packages": [
     {
-      "name": "HubiGraphs",
+      "name": "HubiGraphs-Alt",
       "category": "Convenience",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/packageManifest.json",
-      "description": "All your graphing needs, hosted locally on your hub!"
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/packageManifest.json",
+      "description": "All your graphing needs, hosted locally on your hub! Origional author Thomas Howard."
     }
   ]
 }
