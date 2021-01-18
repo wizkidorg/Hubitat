@@ -1,6 +1,6 @@
 {
   "packageName": "HubiGraphs",
-  "author": "Thomas Howard",
+  "author": "wizkidorg",
   "version": "4.5",
   "minimumHEVersion": "0.0",
   "dateReleased": "2021-01-04",
@@ -8,96 +8,96 @@
     {
       "id": "8707a4e2-785d-4916-acd7-749a0ed10d7c",
       "name": "Hubigraphs",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraphs.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraphs.groovy",
       "required": true,
       "oauth": false
     },
     {
       "id": "027b6424-ea31-4f28-9eb4-9e117cf650ef",
       "name": "Hubigraph Line Graph",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_line_graph.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_line_graph.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "e0706d77-175c-4aa7-9972-317dcbefe19c",
       "name": "Hubigraph Gauge",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_gauge.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_gauge.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "b2ba592b-4ad2-473f-b5a7-378cc6972535",
       "name": "Hubigraph Time Line",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_time_line.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_time_line.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "a30ad8f9-b027-41ae-ba4d-efe5d19aad24",
       "name": "Hubigraph Range Bar",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_range_bar.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_range_bar.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "2f853243-ba9e-4335-92dd-1edb4cac7abe",
       "name": "Hubigraph Bar Graph",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_bar_graph.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_bar_graph.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "9d94d8af-e592-4896-87cf-661ebcfee7f9",
       "name": "Hubigraph Time Graph",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_time_graph.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_time_graph.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "55bbc20d-6a40-4744-bfc4-c4903a99ff85",
       "name": "Hubigraph Heat Map",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_heat_map.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_heat_map.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "80af7b8b-3c75-44c4-a036-7f6e0d4a0361",
       "name": "Hubigraph Weather Tile",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_weather_tile.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_weather_tile.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "d226575e-1b10-4ef9-b835-66fbf07b9b3e",
       "name": "Hubigraph Forecast Tile",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_forecast_tile.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_forecast_tile.groovy",
       "required": true,
       "oauth": true
     },
     {
       "id": "ddd76acc-76d2-4cad-83e4-0071049fd9c8",
       "name": "Hubigraph Radar Tile",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_radar_tile.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_radar_tile.groovy",
       "required": true,
       "oauth": true
     },
      {
       "id": "e7e04f39-d3fe-4339-b4a7-9ca14f3c1bab",
       "name": "Hubigraph Weather Tile 2",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_weather_tile2.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_weather_tile2.groovy",
       "required": true,
       "oauth": true
     }
@@ -106,15 +106,15 @@
     {
       "id": "0e142b8f-b61e-409d-9a70-a866036693fa",
       "name": "Hubigraph Tile Device",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_tile.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_tile.groovy",
       "required": true
     },
     {
       "id": "cb57804c-48dc-4935-b0d3-ed698bb28bf9",
       "name": "Hubigraph OpenWeather Device",
-      "namespace": "tchoward",
-      "location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/hubigraph_openweather_driver.groovy",
+      "namespace": "wizkidorg",
+      "location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/hubigraph_openweather_driver.groovy",
       "required": true
     }  
   ],
@@ -122,22 +122,22 @@
 		{
 			"id":"a930f16d-d5f4-4f37-b874-6b0dcfd47ace",
 			"name": "HubiGraph.js",
-			"location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/HubiGraph.js"
+			"location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/HubiGraph.js"
 		},
     		{
 			"id":"a7af9806-4b0e-4032-a78e-a41e27e4d685",
 			"name": "WeatherTile.js",
-			"location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/WeatherTile.js"
+			"location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/WeatherTile.js"
 		},
 	  	{
 			"id":"ba8d5ae0-1fbd-430a-bae0-bb5c0bd17ebd",
 			"name": "WeatherTile2.js",
-			"location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/WeatherTile2.js"
+			"location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/WeatherTile2.js"
 		},
 	  	{
 			"id":"f06ea400-fe7a-49ef-8c50-6418f0a78dc6",
 			"name": "WeatherTile2.css",
-			"location": "https://raw.githubusercontent.com/tchoward/Hubitat/master/WeatherTile2.css"
+			"location": "https://raw.githubusercontent.com/wizkidorg/Hubitat/master/WeatherTile2.css"
 		}
     
 	]
