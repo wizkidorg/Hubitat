@@ -32,11 +32,11 @@ def version() { return "v0.22" }
 
 definition(
     name: "Hubigraph Radar Tile",
-    namespace: "tchoward",
-    author: "Thomas Howard",
+    namespace: "wizkidorg",
+    author: "wizkidorg",
     description: "Hubigraph Radar Tile",
     category: "",
-    parent: "tchoward:Hubigraphs",
+    parent: "wizkidorg:Hubigraphs",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
     iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",
     iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png",

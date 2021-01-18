@@ -2,8 +2,8 @@ import groovy.json.*;
 
 definition(
     name: "HubiPanel",
-    namespace: "tchoward",
-    author: "Thomas Howard",
+    namespace: "wizkidorg",
+    author: "wizkidorg",
     description: "Switch dashboards with ease",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",

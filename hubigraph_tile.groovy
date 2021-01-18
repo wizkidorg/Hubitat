@@ -1,5 +1,5 @@
 metadata{
-	definition( name: "Hubigraph Tile Device", namespace: "tchoward", author: "Thomas Howard") {
+	definition( name: "Hubigraph Tile Device", namespace: "wizkidorg", author: "Thomas Howard") {
 		// Indicate what capabilities the device should be capable of
 		
         capability "Actuator"

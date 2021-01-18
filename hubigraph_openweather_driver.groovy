@@ -5,8 +5,8 @@ public static String version()      {  return '4.5.1'  }
 
 metadata {
 	definition (name: 'OpenWeather Hubigraph Driver',
-		        namespace: 'tchoward',
-		        author: 'Thomas Howard',
+		        namespace: 'wizkidorg',
+		        author: 'wizkidorg',
 		        importUrl: '') {
                     capability 'Sensor'
             
