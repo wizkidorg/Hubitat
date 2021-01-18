@@ -70,25 +70,25 @@ preferences {
    
 
     mappings {
-        path("/graph/") {
+        path("/graph") {
             action: [
                 GET: "getGraph"
             ]
         }
     
-        path("/getData/") {
+        path("/graph/getData") {
             action: [
                 GET: "getData"
             ]
         }
         
-        path("/getOptions/") {
+        path("/graph/getOptions") {
             action: [
                 GET: "getOptions"
             ]
         }
         
-        path("/getSubscriptions/") {
+        path("/graph/getSubscriptions") {
             action: [
                 GET: "getSubscriptions"
             ]
@@ -729,7 +729,7 @@ def mainPage() {
                 }
                 parent.hubiForm_section(this, "Local Graph URL", 1, "link"){
                     container = [];
-                    container << parent.hubiForm_text(this, "${state.localEndpointURL}graph/?access_token=${state.endpointSecret}");
+                    container << parent.hubiForm_text(this, "${state.localEndpointURL}graph?access_token=${state.endpointSecret}");
                     
                     parent.hubiForm_container(this, container, 1); 
                 }
@@ -939,7 +939,7 @@ def uninstalled() {
 }
 
 private removeChildDevices(delete) {
-	delete.each {deleteChildDevice(it.deviceNetworkId)}
+    delete.each {deleteChildDevice(it.deviceNetworkId)}
 }
 
 def updated() {
@@ -1249,29 +1249,62 @@ class Loader {
 }
 
 function getOptions() {
-    return jQuery.get("${state.localEndpointURL}getOptions/?access_token=${state.endpointSecret}", (data) => {
-        options = data;
-        console.log("Got Options");
-        console.log(options);
-    });
+    if (location.hostname === "cloud.hubitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}graph/getOptions?access_token=${state.endpointSecret}", (data) => {
+            options = data;
+            console.log("Got Options");
+            console.log(options);
+        });
+
+    } else {
+        // Local
+        return jQuery.get("${state.localEndpointURL}graph/getOptions?access_token=${state.endpointSecret}", (data) => {
+            options = data;
+            console.log("Got Options");
+            console.log(options);
+        });
+    }
 }
 
 function getSubscriptions() {
-    return jQuery.get("${state.localEndpointURL}getSubscriptions/?access_token=${state.endpointSecret}", (data) => {
-        console.log("Got Subscriptions");
-        //console.log(data);
-        subscriptions = data;
-        
-    });
+    if (location.hostname === "cloud.hubitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}graph/getSubscriptions?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Subscriptions");
+            //console.log(data);
+            subscriptions = data;
+        });
+
+    } else {
+        // Local
+        return jQuery.get("${state.localEndpointURL}graph/getSubscriptions?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Subscriptions");
+            //console.log(data);
+            subscriptions = data;
+        });
+    }
 }
 
 function getGraphData() {
-    return jQuery.get("${state.localEndpointURL}getData/?access_token=${state.endpointSecret}", (data) => {
-        console.log("Got Graph Data");
-        //console.log(data);
-        graphData = data;
-    });
+    if (location.hostname === "cloud.hubitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}graph/getData?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Graph Data");
+            //console.log(data);
+            graphData = data;
+        });
+    } else {
+        // Local
+        return jQuery.get("${state.localEndpointURL}graph/getData?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Graph Data");
+            //console.log(data);
+            graphData = data;
+        });
+    }
 }
+
+
 
 function parseEvent(event) {
     const now = new Date().getTime();
@@ -1444,16 +1477,21 @@ async function onLoad() {
     });
 
     //start our update cycle
+    if (location.hostname === "cloud.hubitat.com") { 
+        // Sorry had to hardcode refresh for cloud. Not sure if they support eventsockets. 
+        options.graphRefreshRate = 10; 
+    } 
     if(options.graphRefreshRate !== -1) {
-        //start websocket
-        websocket = new WebSocket("ws://" + location.hostname + "/eventsocket");
-        websocket.onopen = () => {
-            console.log("WebSocket Opened!");
+        if(options.graphRefreshRate == 0) {
+            //start websocket
+            websocket = new WebSocket("ws://" + location.hostname + "/eventsocket");
+            websocket.onopen = () => {
+                console.log("WebSocket Opened!");
+            }
+            websocket.onmessage = (event) => {
+                parseEvent(JSON.parse(event.data));
+            }
         }
-        websocket.onmessage = (event) => {
-            parseEvent(JSON.parse(event.data));
-        }
-
         if(options.graphRefreshRate !== 0) {
             setInterval(() => {
                 update();
@@ -1747,7 +1785,8 @@ def initializeAppEndpoint() {
             if (accessToken) {
                 state.endpoint = getApiServerUrl()
                 state.localEndpointURL = fullLocalApiServerUrl("")  
-                state.remoteEndpointURL = fullApiServerUrl("/graph")
+                //state.remoteEndpointURL = fullApiServerUrl("/graph")
+                state.remoteEndpointURL = fullApiServerUrl("")
                 state.endpointSecret = accessToken
             }
         }
@@ -1868,18 +1907,18 @@ def getColorCode(code){
     ret = "#FFFFFF"
     switch (code){
         case 7:  ret = "#800000"; break;
-        case 1:	    ret = "#FF0000"; break;
-        case 6:	ret = "#FFA500"; break;	
-        case 8:	ret = "#FFFF00"; break;	
-        case 9:	ret = "#808000"; break;	
-        case 2:	ret = "#008000"; break;	
-        case 5:	ret = "#800080"; break;	
-        case 4:	ret = "#FF00FF"; break;	
-        case 10: ret = "#00FF00"; break;	
-        case 11: ret = "#008080"; break;	
-        case 12: ret = "#00FFFF"; break;	
-        case 3:	ret = "#0000FF"; break;	
-        case 13: ret = "#000080"; break;	
+        case 1:        ret = "#FF0000"; break;
+        case 6:    ret = "#FFA500"; break;    
+        case 8:    ret = "#FFFF00"; break;    
+        case 9:    ret = "#808000"; break;    
+        case 2:    ret = "#008000"; break;    
+        case 5:    ret = "#800080"; break;    
+        case 4:    ret = "#FF00FF"; break;    
+        case 10: ret = "#00FF00"; break;    
+        case 11: ret = "#008080"; break;    
+        case 12: ret = "#00FFFF"; break;    
+        case 3:    ret = "#0000FF"; break;    
+        case 13: ret = "#000080"; break;    
     }
     return ret;
 }

@@ -49,20 +49,20 @@ preferences {
        page(name: "disableAPIPage") 
 
 mappings {
-    path("/graph/") {
+    path("/graph) {
             action: [
               GET: "getGraph"
             ]
         }
     }
     
-    path("/getData/") {
+    path("/graph/getData/") {
         action: [
             GET: "getData"
         ]
     }
         
-    path("/getOptions/") {
+    path("/graph/getOptions/") {
         action: [
             GET: "getOptions"
         ]

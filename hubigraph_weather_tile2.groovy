@@ -53,37 +53,37 @@ preferences {
    
 
     mappings {
-        path("/graph/") {
+        path("/graph") {
             action: [
                 GET: "getGraph"
             ]
         }
     
-        path("/getData/") {
+        path("/graph/getData") {
             action: [
                 GET: "getData"
             ]
         }
         
-        path("/getOptions/") {
+        path("/graph/getOptions") {
             action: [
                 GET: "getOptions"
             ]
         }
         
-        path("/getSubscriptions/") {
+        path("/graph/getSubscriptions") {
             action: [
                 GET: "getSubscriptions"
             ]
         }
         
-        path("/updateSettings/") {
+        path("/graph/updateSettings") {
             action: [
                 POST: "updateSettings"
             ]
         }
         
-         path("/tile/") {
+         path("/graph/tile") {
             action: [
                 GET: "getTile"
             ]

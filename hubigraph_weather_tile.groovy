@@ -50,25 +50,25 @@ preferences {
    
 
     mappings {
-        path("/graph/") {
+        path("/graph") {
             action: [
                 GET: "getTile"
             ]
         }
     
-        path("/getData/") {
+        path("/graph/getData") {
             action: [
                 GET: "getData"
             ]
         }
         
-        path("/getOptions/") {
+        path("/graph/getOptions") {
             action: [
                 GET: "getOptions"
             ]
         }
         
-        path("/getSubscriptions/") {
+        path("/graph/getSubscriptions") {
             action: [
                 GET: "getSubscriptions"
             ]

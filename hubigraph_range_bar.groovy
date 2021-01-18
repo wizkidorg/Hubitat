@@ -52,26 +52,26 @@ preferences {
 
 
 mappings {
-    path("/graph/") {
+    path("/graph") {
             action: [
               GET: "getGraph"
             ]
         }
     }
     
-    path("/getData/") {
+    path("/getData") {
         action: [
             GET: "getData"
         ]
     }
         
-    path("/getOptions/") {
+    path("/getOptions") {
         action: [
             GET: "getOptions"
         ]
     }
     
-    path("/getSubscriptions/") {
+    path("/getSubscriptions") {
         action: [
             GET: "getSubscriptions"
         ]

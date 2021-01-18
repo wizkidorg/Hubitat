@@ -53,7 +53,7 @@ preferences {
    
 
 mappings {
-    path("/graph/") {
+    path("/graph) {
             action: [
               GET: "getGraph"
             ]

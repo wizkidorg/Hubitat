@@ -63,26 +63,26 @@ preferences {
    
 
 mappings {
-    path("/graph/") {
+    path("/graph") {
             action: [
               GET: "getGraph"
             ]
         }
     }
     
-    path("/getData/") {
+    path("/graph/getData") {
         action: [
             GET: "getData"
         ]
     }
         
-    path("/getOptions/") {
+    path("/graph/getOptions") {
         action: [
             GET: "getOptions"
         ]
     }
     
-    path("/getSubscriptions/") {
+    path("/graph/getSubscriptions") {
         action: [
             GET: "getSubscriptions"
         ]
@@ -178,10 +178,10 @@ def attributeConfigurationPage() {
                           
     state.count_ = 0;     
     dynamicPage(name: "attributeConfigurationPage") {
-    	parent.hubiForm_section(this, "Directions", 1, "directions"){
+        parent.hubiForm_section(this, "Directions", 1, "directions"){
             container = [];
             container << parent.hubiForm_text(this, """Configure what counts as a 'start' or 'end' event for each attribute on the timeline. 
-            										   For example, Switches start when they are 'on' and end when they are 'off'.\n\nSome attributes will automatically populate. 
+                                                       For example, Switches start when they are 'on' and end when they are 'off'.\n\nSome attributes will automatically populate. 
                                                        You can change them if you have a different configuration (chances are you won't).
                                                        Additionally, for devices with numeric values, you can define a range of values that count as 'start' or 'end'. 
                                                        For example, to select all the times a temperature is above 70.5 degrees farenheight, you would set the start to '> 70.5', and the end to '< 70.5'.
@@ -200,13 +200,13 @@ def attributeConfigurationPage() {
              attributes.each { attribute ->
                  state.count_++;
                  parent.hubiForm_section(this, "${sensor.displayName} ${attribute}", 1, "directions"){
-                 		container = [];
+                         container = [];
                         container << parent.hubiForm_text_input(this,   "Override Device Name<small></i><br>Use %deviceName% for DEVICE and %attributeName% for ATTRIBUTE</i></small>",
                                                                         "graph_name_override_${sensor.id}_${attribute}",
                                                                         "%deviceName%: %attributeName%", false);
-                        container << parent.hubiForm_color      (this,  "Line", 				"attribute_${sensor.id}_${attribute}_line",  "#3e4475", false, true);
-						container << parent.hubiForm_text_input (this,  "Start event value", 	"attribute_${sensor.id}_${attribute}_start", supportedTypes[attribute] ? supportedTypes[attribute].start : "", false);
-                        container << parent.hubiForm_text_input (this,  "End event value", 		"attribute_${sensor.id}_${attribute}_end",   supportedTypes[attribute] ? supportedTypes[attribute].end :   "", false);
+                        container << parent.hubiForm_color      (this,  "Line",                 "attribute_${sensor.id}_${attribute}_line",  "#3e4475", false, true);
+                        container << parent.hubiForm_text_input (this,  "Start event value",     "attribute_${sensor.id}_${attribute}_start", supportedTypes[attribute] ? supportedTypes[attribute].start : "", false);
+                        container << parent.hubiForm_text_input (this,  "End event value",         "attribute_${sensor.id}_${attribute}_end",   supportedTypes[attribute] ? supportedTypes[attribute].end :   "", false);
                         parent.hubiForm_container(this, container, 1); 
                         }
                  cnt += 1;
@@ -220,7 +220,7 @@ def graphSetupPage(){
     
     
     dynamicPage(name: "graphSetupPage") {
-    	parent.hubiForm_section(this, "General Options", 1, "directions"){	
+        parent.hubiForm_section(this, "General Options", 1, "directions"){    
             input( type: "enum", name: "graph_update_rate", title: "<b>Select graph update rate</b>", multiple: false, required: false, 
                   options: [["-1":"Never"], ["0":"Real Time"], ["10":"10 Milliseconds"], ["1000":"1 Second"], ["5000":"5 Seconds"], ["60000":"1 Minute"], ["300000":"5 Minutes"], ["600000":"10 Minutes"], ["1800000":"Half Hour"], ["3600000":"1 Hour"]], defaultValue: "0")
             input( type: "enum", name: "graph_timespan", title: "<b>Select Timespan to Graph</b>", multiple: false, required: false, options: [["60000":"1 Minute"], ["3600000":"1 Hour"], ["43200000":"12 Hours"], ["86400000":"1 Day"], ["259200000":"3 Days"], ["604800000":"1 Week"]], defaultValue: "43200000")     
@@ -244,7 +244,7 @@ def graphSetupPage(){
         }
         parent.hubiForm_section(this, "Devices", 1){
             container = [];
-            container << parent.hubiForm_color (this, 	  "Device Text", "graph_axis", "#FFFFFF", false);
+            container << parent.hubiForm_color (this,       "Device Text", "graph_axis", "#FFFFFF", false);
             container << parent.hubiForm_font_size (this, title: "Device", name: "graph_axis", default: 9, min: 2, max: 20);
             parent.hubiForm_container(this, container, 1);  
         }  
@@ -302,7 +302,7 @@ def mainPage() {
                     container << parent.hubiForm_text(this, "${state.localEndpointURL}graph/?access_token=${state.endpointSecret}");
                     
                     parent.hubiForm_container(this, container, 1); 
-                }
+                }   
                 
                 if (graph_update_rate){
                      parent.hubiForm_section(this, "Preview", 10, "show_chart"){                         
@@ -362,7 +362,7 @@ def uninstalled() {
 }
 
 private removeChildDevices(delete) {
-	delete.each {deleteChildDevice(it.deviceNetworkId)}
+    delete.each {deleteChildDevice(it.deviceNetworkId)}
 }
 
 
@@ -492,29 +492,57 @@ class Loader {
 }
 
 function getOptions() {
-    return jQuery.get("${state.localEndpointURL}getOptions/?access_token=${state.endpointSecret}", (data) => {
-        console.log("Got Options");
-        console.log(data);                        
-        options = data;
-    });
+    if (location.hostname === "cloud.habitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}getOptions/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Options");
+            console.log(data);                        
+            options = data;
+        });
+    } else { 
+        // Local
+        return jQuery.get("${state.localEndpointURL}getOptions/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Options");
+            console.log(data);                        
+            options = data;
+        });
+    }
 }
 
 function getSubscriptions() {
-    return jQuery.get("${state.localEndpointURL}getSubscriptions/?access_token=${state.endpointSecret}", (data) => {
-        console.log("Got Subscriptions");
-        console.log(data);
-        subscriptions = data;
-        
-    });
+    if (location.hostname === "cloud.habitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}getSubscriptions/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Subscriptions");
+            console.log(data);
+            subscriptions = data;    
+        });
+    } else {
+        // Local
+        return jQuery.get("${state.localEndpointURL}getSubscriptions/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Subscriptions");
+            console.log(data);
+            subscriptions = data;    
+        });
+    }
 }
 
 function getGraphData() {
-    return jQuery.get("${state.localEndpointURL}getData/?access_token=${state.endpointSecret}", (data) => {
-        console.log("Got Graph Data");
-        console.log(data);
-        unparsedData = data;
-        
-    });
+    if (location.hostname === "cloud.habitat.com") { 
+        // Cloud
+        return jQuery.get("${state.remoteEndpointURL}getData/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Graph Data");
+            console.log(data);
+            unparsedData = data;
+        });
+    } else {
+        // Local
+        return jQuery.get("${state.localEndpointURL}getData/?access_token=${state.endpointSecret}", (data) => {
+            console.log("Got Graph Data");
+            console.log(data);
+            unparsedData = data;
+        });
+    }
 }
 
 function parseEvent(event) {
@@ -828,10 +856,10 @@ function drawChart(now, min, callback) {
     dataTable.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 
     subscriptions.order.forEach(orderStr => {
-      	const splitStr = orderStr.split('_');
-      	const id = splitStr[1];
-      	const attribute = splitStr[2];
-      	const events = graphData[id][attribute];
+          const splitStr = orderStr.split('_');
+          const id = splitStr[1];
+          const attribute = splitStr[2];
+          const events = graphData[id][attribute];
         
             let newArr = [...events];
 
@@ -942,18 +970,18 @@ def getColorCode(code){
     ret = "#FFFFFF"
     switch (code){
         case 7:  ret = "#800000"; break;
-        case 1:	    ret = "#FF0000"; break;
-        case 6:	ret = "#FFA500"; break;	
-        case 8:	ret = "#FFFF00"; break;	
-        case 9:	ret = "#808000"; break;	
-        case 2:	ret = "#008000"; break;	
-        case 5:	ret = "#800080"; break;	
-        case 4:	ret = "#FF00FF"; break;	
-        case 10: ret = "#00FF00"; break;	
-        case 11: ret = "#008080"; break;	
-        case 12: ret = "#00FFFF"; break;	
-        case 3:	ret = "#0000FF"; break;	
-        case 13: ret = "#000080"; break;	
+        case 1:        ret = "#FF0000"; break;
+        case 6:    ret = "#FFA500"; break;    
+        case 8:    ret = "#FFFF00"; break;    
+        case 9:    ret = "#808000"; break;    
+        case 2:    ret = "#008000"; break;    
+        case 5:    ret = "#800080"; break;    
+        case 4:    ret = "#FF00FF"; break;    
+        case 10: ret = "#00FF00"; break;    
+        case 11: ret = "#008080"; break;    
+        case 12: ret = "#00FFFF"; break;    
+        case 3:    ret = "#0000FF"; break;    
+        case 13: ret = "#000080"; break;    
     }
     return ret;
 }
